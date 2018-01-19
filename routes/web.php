@@ -28,3 +28,5 @@ Route::get('/newvehicle', 'vehicleController@newVehicle');
 Route::post('/newvehiclesubmit', 'vehicleController@newVehicleSubmit');
 Route::get('/listvehicles', 'vehicleController@listVehicles');
 Route::post('/deletevehicle', 'vehicleController@deleteVehicle');
+Route::get('/editvehicle', 'vehicleController@editVehicle');
+Route::post('/editvehicle', 'vehicleController@saveVehicle');

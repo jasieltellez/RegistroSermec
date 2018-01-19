@@ -78,4 +78,45 @@ class vehicleController extends Controller
 			
 		}
 	}
+
+
+	
+	public function EditVehicle(Request $request){
+		
+			try{
+				$vehicle=Vehicle::Find($request->input('id'));
+				return view('editvehicle')
+					->with('vehicle',$vehicle);
+			}
+			catch(Exception $e){
+				return "Ha ocurrido un error.";
+			}
+
+			
+		
+		
+	}
+
+
+	public function Savevehicle(Request $request){
+		if($request->ajax()){
+			try{
+				$vehicle=Vehicle::Find($request->input('id'));
+				$vehicle->patent=$request->input('patente');
+				$vehicle->brand=$request->input('marca');
+				$vehicle->model=$request->input('modelo');
+				$vehicle->year=$request->input('anno');
+				
+
+				$vehicle->save();
+				return "Vehículo con patente {$vehicle->patent} salvado correctamente";
+			}
+			catch(Exception $e){
+				return "Ha ocurrido un error al intentar modificar el vehículo con patente {$vehicle->patent}.";
+			}
+
+			
+		}
+
+	}
 }

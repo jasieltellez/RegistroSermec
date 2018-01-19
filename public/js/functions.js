@@ -9,7 +9,7 @@ $(document).ready(function(){
 	////////////////Acciones relacionadas a los Vehículos///////////////////////////////
 	$('#buttonAddVehicle').click(NewVehicleSubmit)
 	$('.deleteVehicleLink').click(DeleteVehicle)
-	//$('#buttonSaveClient').click(SaveClient)
+	$('#buttonSaveVehicle').click(SaveVehicle)
 	
 })
 
@@ -157,4 +157,34 @@ var data={
 
 
 
+}
+
+
+function SaveVehicle(e)
+{
+	e.preventDefault()
+	var url='/editvehicle'
+	var patente=$('#inputPatente')
+	var marca=$('#inputMarca')
+	var modelo=$('#inputModelo')
+	var anno=$('#inputAnno')
+	var id=$('#idVehicle')
+
+	var data={
+	"id":id.text(),
+	"patente":patente.val(),
+	"marca":marca.val(),
+	"modelo":modelo.val(),
+	"anno":anno.val()
+	
+	}
+	$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+	$.post(url,data,function(result){
+		$("#msgEditVehicle").text(result)
+	})
 }
