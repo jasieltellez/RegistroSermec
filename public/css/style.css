@@ -1,0 +1,22 @@
+
+
+header{
+	background-color: #090978;
+	color: white;
+}
+
+.main-content{
+	padding-top: 70px;
+
+}
+footer{
+	background-color: #090978;
+	color: white;
+
+}
+
+#frmNewClient{
+	padding-bottom: 70px;
+}
+
+td a{padding-left: 10px;}
