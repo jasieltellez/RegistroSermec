@@ -33,8 +33,8 @@
 							Orden Servicio
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">Nueva Orden</a>
-							<a class="dropdown-item" href="#">Mostrar Orden</a>
+							<a class="dropdown-item" href="/newserviceorder">Nueva Orden</a>
+							<a class="dropdown-item" href="listserviceorders">Mostrar Orden</a>
 							
 						</div>
 					</li>

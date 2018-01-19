@@ -10,6 +10,7 @@ $(document).ready(function(){
 	$('#buttonAddVehicle').click(NewVehicleSubmit)
 	$('.deleteVehicleLink').click(DeleteVehicle)
 	$('#buttonSaveVehicle').click(SaveVehicle)
+	////////////////Acciones relacionadas a los Ordenes de Servicio///////////////////////////////
 	
 })
 
@@ -188,3 +189,6 @@ function SaveVehicle(e)
 		$("#msgEditVehicle").text(result)
 	})
 }
+
+
+///////////////Metodos relacionados a las Ordenes de Servicio///////////////////////////////////

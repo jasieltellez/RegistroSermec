@@ -30,3 +30,6 @@ Route::get('/listvehicles', 'vehicleController@listVehicles');
 Route::post('/deletevehicle', 'vehicleController@deleteVehicle');
 Route::get('/editvehicle', 'vehicleController@editVehicle');
 Route::post('/editvehicle', 'vehicleController@saveVehicle');
+
+////////Rutas Asociadas a las Ordenes de Servicio////////////////////////////////////////////
+Route::get('/newserviceorder', 'serviceOrderController@newServiceOrder');
