@@ -119,4 +119,20 @@ class vehicleController extends Controller
 		}
 
 	}
+
+
+
+	public function GetVehicle(Request $request){
+		if($request->ajax()){
+			try{
+				$vehicle=Vehicle::Find($request->input('id'));				
+				return $vehicle;
+			}
+			catch(Exception $e){
+				return $e;
+			}
+
+			
+		}
+	}
 }

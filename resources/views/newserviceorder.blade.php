@@ -32,7 +32,8 @@
 		<div class="form-group col-md-3">
 			<label for="selectClientName">Cliente</label>
 			<select class="form-control" id="selectClientName">
-				<option>Default select</option>
+				<option value="Seleccione">Seleccione</option>
+				<?php echo($clients)?>
 			</select>
 		</div>
 		<div class="form-group col-md-3">
@@ -40,8 +41,8 @@
 			<input type="text" class="form-control" id="inputCellNumber" readonly>
 		</div>
 		<div class="form-group col-md-3">
-			<label for="inputTel">Teléfono</label>
-			<input type="text" class="form-control" id="inputCellNumber" readonly>
+			<label for="inputPhoneNumber">Teléfono</label>
+			<input type="text" class="form-control" id="inputPhoneNumber" readonly>
 		</div>
 		<div class="form-group col-md-3">
 			<label for="inputEmail">Correo</label>
@@ -53,7 +54,8 @@
 		<div class="form-group col-md-3">
 			<label for="selectPatent">Patente</label>
 			<select class="form-control" id="selectPatent">
-				<option>Default select</option>
+				<option value="Seleccione">Seleccione</option>
+				<?php echo($vehicles)?>
 			</select>
 		</div>
 		<div class="form-group col-md-3">
@@ -79,10 +81,40 @@
 		
 	</div>
 	<div><h4>Servicios Realizados</h4></div>
-	<div class="row">
+	<div class="row align-items-end">
+		
+		<div class="form-group col-md-2">
+			<label for="inputCantidad">Cantidad</label>
+			<input type="number" class="form-control" id="inputCantidad" value="1" min="1" required>
+		</div>
+		<div class="form-group col-md-5">
+			<label for="inputDescripcion">Descripción del Servicio</label>
+			<input type="text" class="form-control" id="inputDescripcion" required>
+		</div>
+		<div class="form-group col-md-3">
+			
+			<label for="inputValorU">Valor Unitario</label>
+			<div class="input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text " id="basic-addon1">$</span>
+			</div>
+			<input type="text" class="form-control text-right" id="inputValorU" required>
+			<div class="input-group-append">
+				<span class="input-group-text " id="basic-addon2">.00</span>
+			</div>
+			</div>
+			
+		</div>
+		<div class="form-group col-md-2 ">
+			
+			<button id='buttonAddService' type="submit" class="btn btn-primary">Agregar</button>
+			
+		</div>
+	</div>
+	<div class="">
 		
 		<div class="form-group col ">
-			<table class="table">
+			<table id="tableservices" class="table">
 				<thead>
 					<tr>
 
@@ -94,9 +126,9 @@
 						
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tbodyServices">
 
-
+					
 
 				</tbody>
 			</table>
@@ -109,11 +141,11 @@
 
 
 	<div class="form-group ">
-		<label id="msgAddClient" class="alert-success"></label>
+		<label id="msgAddSO" class="alert-success"></label>
 		
 	</div>
 	
-	<button id='buttonAddClient' type="submit" class="btn btn-primary">Aceptar</button>
+	<button id='buttonAddSO' type="submit" class="btn btn-primary">Aceptar</button>
 </form>
 
 

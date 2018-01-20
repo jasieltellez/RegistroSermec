@@ -22,6 +22,7 @@ Route::get('/listclients', 'clientController@listClients');
 Route::post('/deleteclient', 'clientController@deleteClient');
 Route::get('/editclient', 'clientController@editClient');
 Route::post('/editclient', 'clientController@saveClient');
+Route::post('/getclientdetails', 'clientController@getClient');
 
 ////////Rutas Asociadas a los Vehiculos////////////////////////////////////////////
 Route::get('/newvehicle', 'vehicleController@newVehicle');
@@ -30,6 +31,7 @@ Route::get('/listvehicles', 'vehicleController@listVehicles');
 Route::post('/deletevehicle', 'vehicleController@deleteVehicle');
 Route::get('/editvehicle', 'vehicleController@editVehicle');
 Route::post('/editvehicle', 'vehicleController@saveVehicle');
+Route::post('/getvehicledetails', 'vehicleController@getVehicle');
 
 ////////Rutas Asociadas a las Ordenes de Servicio////////////////////////////////////////////
-Route::get('/newserviceorder', 'serviceOrderController@newServiceOrder');
+Route::get('/newserviceorder', 'serviceOrderController@newServiceOrderInitialLoad');

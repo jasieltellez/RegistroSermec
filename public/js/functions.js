@@ -11,6 +11,9 @@ $(document).ready(function(){
 	$('.deleteVehicleLink').click(DeleteVehicle)
 	$('#buttonSaveVehicle').click(SaveVehicle)
 	////////////////Acciones relacionadas a los Ordenes de Servicio///////////////////////////////
+	$('#selectPatent').change(FillVehicleDetails)
+	$('#selectClientName').change(FillClientDetails)
+	$('#buttonAddService').click(AddService)
 	
 })
 
@@ -26,17 +29,17 @@ function NewUserSubmit(e)
 	var email=$('#inputEmail')
 
 	var data={
-	"name":name.val(),
-	"cell":cell.val(),
-	"fijo":fijo.val(),
-	"rut":rut.val(),
-	"email":email.val()
+		"name":name.val(),
+		"cell":cell.val(),
+		"fijo":fijo.val(),
+		"rut":rut.val(),
+		"email":email.val()
 	}
 	$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
 
 	$.post(url,data,function(result){
 		$("#msgAddClient").text(result)
@@ -45,21 +48,21 @@ function NewUserSubmit(e)
 
 
 function DeleteClient(e){
- e.preventDefault()
+	e.preventDefault()
 
- var url='/deleteclient'
- var idClient=e.target.parentNode.id 
- var row=e.target.parentNode.parentNode
+	var url='/deleteclient'
+	var idClient=e.target.parentNode.id 
+	var row=e.target.parentNode.parentNode
 
-var data={
-	"id":idClient,
-	
+	var data={
+		"id":idClient,
+
 	}
 	$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
 
 	$.post(url,data,function(result){
 		if (result=="OK") {
@@ -83,18 +86,18 @@ function SaveClient(e)
 	var id=$('#idClient')
 
 	var data={
-	"id":id.text(),
-	"name":name.val(),
-	"cell":cell.val(),
-	"fijo":fijo.val(),
-	"rut":rut.val(),
-	"email":email.val()
+		"id":id.text(),
+		"name":name.val(),
+		"cell":cell.val(),
+		"fijo":fijo.val(),
+		"rut":rut.val(),
+		"email":email.val()
 	}
 	$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
 
 	$.post(url,data,function(result){
 		$("#msgSaveClient").text(result)
@@ -114,17 +117,17 @@ function NewVehicleSubmit(e)
 	
 
 	var data={
-	"patente":patente.val(),
-	"marca":marca.val(),
-	"modelo":modelo.val(),
-	"anno":anno.val()
-	
+		"patente":patente.val(),
+		"marca":marca.val(),
+		"modelo":modelo.val(),
+		"anno":anno.val()
+
 	}
 	$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
 
 	$.post(url,data,function(result){
 		$("#msgAddVehicle").text(result)
@@ -134,21 +137,21 @@ function NewVehicleSubmit(e)
 
 
 function DeleteVehicle(e){
- e.preventDefault()
+	e.preventDefault()
 
- var url='/deletevehicle'
- var idVehicle=e.target.parentNode.id 
- var row=e.target.parentNode.parentNode
+	var url='/deletevehicle'
+	var idVehicle=e.target.parentNode.id 
+	var row=e.target.parentNode.parentNode
 
-var data={
-	"id":idVehicle,
-	
+	var data={
+		"id":idVehicle,
+
 	}
 	$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
 
 	$.post(url,data,function(result){
 		if (result=="OK") {
@@ -172,18 +175,18 @@ function SaveVehicle(e)
 	var id=$('#idVehicle')
 
 	var data={
-	"id":id.text(),
-	"patente":patente.val(),
-	"marca":marca.val(),
-	"modelo":modelo.val(),
-	"anno":anno.val()
-	
+		"id":id.text(),
+		"patente":patente.val(),
+		"marca":marca.val(),
+		"modelo":modelo.val(),
+		"anno":anno.val()
+
 	}
 	$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
 
 	$.post(url,data,function(result){
 		$("#msgEditVehicle").text(result)
@@ -192,3 +195,91 @@ function SaveVehicle(e)
 
 
 ///////////////Metodos relacionados a las Ordenes de Servicio///////////////////////////////////
+function FillVehicleDetails(e){
+	e.preventDefault()
+	if ($('#selectPatent').val()!='Seleccione') {
+		var url='/getvehicledetails'
+		var id=$('#selectPatent')
+		var data={
+			"id":id.val()
+		}
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+		$.post(url,data,function(result){
+			if (result) {
+				$('#inputMarca').val(result.brand)
+				$('#inputModelo').val(result.model)
+				$('#inputAnno').val(result.year)
+			}
+		})
+	}
+	else{
+		$('#inputMarca').val('')
+		$('#inputModelo').val('')
+		$('#inputAnno').val('')
+	}
+
+	
+}
+
+function FillClientDetails(e){
+	e.preventDefault()
+	if ($('#selectClientName').val()!='Seleccione') {
+		var url='/getclientdetails'
+		var id=$('#selectClientName')
+		var data={
+			"id":id.val()
+
+		}
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+		$.post(url,data,function(result){
+			if (result) {
+				$('#inputCellNumber').val(result.cell_number)
+				$('#inputPhoneNumber').val(result.phone_number)
+				$('#inputEmail').val(result.email)
+			}
+		})
+	}
+	else{
+		$('#inputCellNumber').val('')
+		$('#inputPhoneNumber').val('')
+		$('#inputEmail').val('')
+	}
+}
+
+
+function AddService(e){
+	e.preventDefault()
+	if (($('#inputCantidad').val()!='') && ($('#inputDescripcion').val()!='')&& ($('#inputValorU').val()!='') ) {
+		
+		cantidad=$("#inputCantidad").val()
+		descripcion=$("#inputDescripcion").val()
+		valorU=$("#inputValorU").val()
+		ValorNeto=cantidad*valorU
+		//Crenado la Fila y las columnas////
+		row=$("<tr></tr>")
+
+		colCantidad=$(`<td>${cantidad}</td>`)
+		colDescripcion=$(`<td>${descripcion}</td>`)
+		colValorU=$(`<td>${valorU}</td>`)
+		colValorN=$(`<td>${ValorNeto}</td>`)
+		colLink=$(`<td><a href="" class='deleteRowService'>Eliminar</a></td>`)
+
+		row.append(colCantidad)
+		row.append(colDescripcion)
+		row.append(colValorU)
+		row.append(colValorN)
+		row.append(colLink)
+
+		$("#tbodyServices").append(row)
+	}
+}

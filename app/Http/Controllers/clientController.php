@@ -113,4 +113,18 @@ class clientController extends Controller
 		}
 
 	}
+
+	public function GetClient(Request $request){
+		if($request->ajax()){
+			try{
+				$client=Client::Find($request->input('id'));				
+				return $client;
+			}
+			catch(Exception $e){
+				return $e;
+			}
+
+			
+		}
+	}
 }

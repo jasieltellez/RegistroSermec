@@ -9,11 +9,22 @@ use App\Vehicle;
 
 class serviceOrderController extends Controller
 {
-    public function NewServiceOrder(){
+    public function NewServiceOrderInitialLoad(){
 
     	$clients=Client::All();
     	$vehicles=Vehicle::All();
-    	return view("newserviceorder");
+    	$clientSelect="";
+    	foreach ($clients as $key => $client) {
+    		$clientSelect=$clientSelect."<option value='{$client->id}'>{$client->name}</option>";
+    	}
+    	$vehicleSelect="";
+    	foreach ($vehicles as $key => $vehicle) {
+    		$vehicleSelect=$vehicleSelect."<option value='{$vehicle->id}'>{$vehicle->patent}</option>";
+    	}
+
+    	return view("newserviceorder")
+    		->with('clients',$clientSelect)
+    		->with('vehicles',$vehicleSelect);
 
     }
 
