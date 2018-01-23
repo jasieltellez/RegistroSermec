@@ -34,7 +34,7 @@
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="/newserviceorder">Nueva Orden</a>
-							<a class="dropdown-item" href="listserviceorders">Mostrar Orden</a>
+							<a class="dropdown-item" href="listorders">Mostrar Órdenes</a>
 							
 						</div>
 					</li>

@@ -36,3 +36,5 @@ Route::post('/getvehicledetails', 'vehicleController@getVehicle');
 ////////Rutas Asociadas a las Ordenes de Servicio////////////////////////////////////////////
 Route::get('/newserviceorder', 'serviceOrderController@newServiceOrderInitialLoad');
 Route::post('/newordersubmit', 'serviceOrderController@newServiceOrderSubmit');
+Route::get('/listorders', 'serviceOrderController@listServiceOrders');
+Route::get('/editorder', 'serviceOrderController@editServiceOrder');
