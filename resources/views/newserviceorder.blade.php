@@ -95,13 +95,13 @@
 			
 			<label for="inputValorU">Valor Unitario</label>
 			<div class="input-group">
-			<div class="input-group-prepend">
-				<span class="input-group-text " id="basic-addon1">$</span>
-			</div>
-			<input type="text" class="form-control text-right" id="inputValorU" required>
-			<div class="input-group-append">
-				<span class="input-group-text " id="basic-addon2">.00</span>
-			</div>
+				<div class="input-group-prepend">
+					<span class="input-group-text " id="basic-addon1">$</span>
+				</div>
+				<input type="text" class="form-control text-right" id="inputValorU" required>
+				<div class="input-group-append">
+					<span class="input-group-text " id="basic-addon2">.00</span>
+				</div>
 			</div>
 			
 		</div>
@@ -132,21 +132,99 @@
 
 				</tbody>
 			</table>
+			
+			<table id="tableTotales" class="offset-md-8 col-md-4">
+
+				<tbody id="tbodyTotales">
+
+					<tr>
+						
+						<td><strong>Total</strong></td>
+						<td><div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text " >$</span>
+							</div>
+							<input type="text" class="form-control text-right" id="inputValorT" readonly>
+							<div class="input-group-append">
+								<span class="input-group-text " >.00</span>
+							</div>
+						</div></td>
+					</tr>
+					<tr>
+						
+						<td><strong>Descuento</strong></td>
+						<td><div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text ">$</span>
+							</div>
+							<input type="text" class="form-control text-right" id="inputValorDescuento" required value="0">
+							<div class="input-group-append">
+								<span class="input-group-text " >.00</span>
+							</div>
+						</div></td>
+					</tr>
+					<tr>
+						
+						<td><strong>Abono</strong></td>
+						<td><div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text ">$</span>
+							</div>
+							<input type="text" class="form-control text-right" id="inputValorAbono" required value="0">
+							<div class="input-group-append">
+								<span class="input-group-text " >.00</span>
+							</div>
+						</div></td>
+					</tr>
+
+
+					<tr>
+						
+						<td><strong>Saldo</strong></td>
+						<td><div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text " >$</span>
+							</div>
+							<input type="text" class="form-control text-right" id="inputSaldo" readonly>
+							<div class="input-group-append">
+								<span class="input-group-text " >.00</span>
+							</div>
+						</div></td>
+					</tr>
+					<tr>
+						<td><strong>M. Pago</strong></td>
+						<td>
+							
+							<div class="input-group">
+
+								<select class="form-control text-center" id="selectPayment">
+									<option value="No pagado">No pagado</option>
+									<option value="Efectivo">Efectivo</option>
+									<option value="Red compra">Red compra</option>
+								</select>
+
+								</div>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+
+
+			</div>
 
 		</div>
-		
-	</div>
 
 
 
 
-	<div class="form-group ">
-		<label id="msgAddSO" class="alert-success"></label>
-		
-	</div>
-	
-	<button id='buttonAddSO' type="submit" class="btn btn-primary">Aceptar</button>
-</form>
+		<div class="form-group ">
+			<label id="msgAddSO" class="alert-success"></label>
+
+		</div>
+
+		<button id='buttonAddSO' type="submit" class="btn btn-primary">Aceptar</button>
+	</form>
 
 
-@endSection
+	@endSection

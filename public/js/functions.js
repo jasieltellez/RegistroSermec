@@ -14,6 +14,9 @@ $(document).ready(function(){
 	$('#selectPatent').change(FillVehicleDetails)
 	$('#selectClientName').change(FillClientDetails)
 	$('#buttonAddService').click(AddService)
+	$('#inputValorAbono').change(UpdateTotales)
+	$('#inputValorDescuento').change(UpdateTotales)
+	$('#buttonAddSO').click(NewServiceOrderSubmit)
 	
 })
 
@@ -271,8 +274,8 @@ function AddService(e){
 		colCantidad=$(`<td>${cantidad}</td>`)
 		colDescripcion=$(`<td>${descripcion}</td>`)
 		colValorU=$(`<td>${valorU}</td>`)
-		colValorN=$(`<td>${ValorNeto}</td>`)
-		colLink=$(`<td><a href="" class='deleteRowService'>Eliminar</a></td>`)
+		colValorN=$(`<td class='tdVunitario'>${ValorNeto}</td>`)
+		colLink=$(`<td><a href="#" class='deleteRowService'>Eliminar</a></td>`)
 
 		row.append(colCantidad)
 		row.append(colDescripcion)
@@ -281,5 +284,107 @@ function AddService(e){
 		row.append(colLink)
 
 		$("#tbodyServices").append(row)
+		UpdateTotales();
+		ClickEventDeleteServiceRow();
 	}
+}
+function ClickEventDeleteServiceRow(){
+	$('.deleteRowService').click(DeleteService)
+}
+
+function DeleteService(e){
+	e.preventDefault()
+	e.target.offsetParent.parentNode.remove()
+	UpdateTotales()
+}
+
+function UpdateTotales(){
+	tparciales=$('.tdVunitario')
+	tparcial=0
+	for (var i = tparciales.length - 1; i >= 0; i--) {
+		tparcial+=parseInt(tparciales[i].textContent)
+		
+	}
+	$('#inputValorT').val(tparcial)
+	abono=($('#inputValorAbono').val())
+	descuento=($('#inputValorDescuento').val())
+	$('#inputSaldo').val(tparcial-descuento-abono)
+
+
+}
+
+function NewServiceOrderSubmit(e){
+	e.preventDefault()
+	fechaOrden=$('#inputDateSO').val()
+	fechaEntrada=$('#inputDateIn').val()
+	fechaSalida=$('#inputDateOut').val()
+	kms=$('#inputKms').val()
+	////////////////////////////////////////
+	idClient=$('#selectClientName').val()	
+	idVehicle=$('#selectPatent').val()
+	///////////////////////////////////////
+	observaciones=$('#inputObservaciones').val()		
+	services=GenerateJsonServiceOrder()
+	///////////////////////////////////////////
+	total=$('#inputValorT').val()
+	descuento=$('#inputValorDescuento').val()
+	abono=$('#inputValorAbono').val()
+	saldo=$('#inputSaldo').val()
+	medioPago=$('#selectPayment').val()
+	////////////////Solicitud Ajax///////////////////////////
+	var url='/newordersubmit'		
+	var data={
+			'fechaOrden':fechaOrden,
+			'fechaEntrada':fechaEntrada,
+			'fechaSalida':fechaSalida,
+			'kms':kms,
+			'idClient':idClient,
+			'idVehicle':idVehicle,
+			'observaciones':observaciones,
+			'servicios':services,
+			'total':total,
+			'descuento':descuento,
+			'abono':abono,
+			'saldo':saldo,
+			'medioPago':medioPago,
+
+
+	}
+	$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+	});
+
+	$.post(url,data,function(result){
+			console.log(result)
+			alert(result)
+
+	})
+
+
+
+
+}
+
+function GenerateJsonServiceOrder(){
+	
+	servicios=[]
+	rows=$('#tbodyServices tr')
+	
+
+	for (var i = rows.length - 1; i >= 0; i--) {
+		cantidad=rows[i].childNodes[0].textContent
+		descripcion=rows[i].childNodes[1].textContent
+		VUnitario=rows[i].childNodes[2].textContent
+		VNeto=rows[i].childNodes[3].textContent
+		service={
+			'cantidad': cantidad,
+			'descripcion': descripcion,
+			'Vunitario': VUnitario,
+			'VNeto': VNeto,
+		}
+		servicios.push(service)
+	}
+return JSON.stringify(servicios)
 }
